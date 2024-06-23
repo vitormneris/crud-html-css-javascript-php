@@ -1,0 +1,146 @@
+body {
+    background: linear-gradient(90deg, rgba(94,94,94,1) 0%, rgba(226,226,226,1) 14%, rgba(255,255,255,1) 33%,
+     rgba(253,253,253,1) 78%, rgba(220,220,220,1) 89%, rgba(98,98,98,1) 100%);
+    font-family: monospace;
+    font-size: 20px;
+}
+
+section {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+div#prin {
+    position: relative;
+    bottom: 30px;
+    width: 600px;
+    height: 530px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 5px solid rgb(0, 0, 0);
+    border-radius: 5%;
+    padding: 30px;
+}
+
+div#crend {
+    position: relative;
+    bottom: 60px;
+    margin-left: 35px;  
+    margin-bottom: 20px;
+    padding: 20px; 
+    padding-top: 50px;
+    width: 500px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 3px solid rgb(0, 0, 0);
+    border-radius: 50px;
+}
+
+div#resposta {
+    position: relative;
+    left: 530px;
+    bottom: 30px;
+    height: 50px;
+    width: 450px;
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 3px solid rgb(0, 0, 0);
+    border-radius: 100px;
+    text-align: center;
+}
+
+div#botoes {
+    position: relative;
+    bottom: 60px;
+    text-align: center;
+}
+
+p {
+    position: relative;
+    bottom: 8px; 
+    font: bold 20px monospace;
+    color: rgb(0, 0, 0);   
+}
+
+h2 {
+    position: relative;
+    bottom: 30px;
+    color: rgb(0, 0, 0);
+    font-size: 40px;
+}
+
+summary {
+    position: relative;
+    font: bold 20px monospace;
+    color: rgb(0, 0, 0);
+    font-size: 30px;
+    padding: 10px;
+    bottom: 20px;
+}
+
+input {
+    border: 3px solid rgb(0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.7); 
+    font: bold 16px monospace;
+    border-radius: 10px;
+    margin-bottom: 22px;
+    padding-right: 35px;
+    height: 30px;
+    width: 270px;
+}
+
+label {
+    color: rgb(0, 0, 0);
+    font-size: 28px;
+    font: bolder;
+}
+
+button {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+    padding: 8px 12px;
+    margin-top: 20px;
+    border-radius: 15px;
+    font-family: monospace;
+    font-size: 20px;
+}
+
+button:hover {
+    color: rgb(127, 110, 255);
+    background-color: black;
+    border: 2px solid rgb(127, 110, 255);
+    transition: 0.5s;
+    border-radius: 15px;
+    font-family: monospace;
+    font-size: 20px;
+    transform: scale(1.1, 1.1);
+}
+
+a:link {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: 2px solid white;
+    padding: 7px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 15px;
+
+}
+
+a:visited {
+    color: white;
+}
+
+a:hover {
+    color: rgb(127, 110, 255);
+    background-color: black;
+    border: 2px solid rgb(127, 110, 255);
+    transition: 0.5s;
+    transform: scale(1.1, 1.1);
+}

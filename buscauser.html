@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilobuscausua.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <title>Gerenciamento de usuários</title>
+</head>
+
+<body>
+    <a id="linkVoltar" href="index.html">Voltar</a>
+    <div id="resposta">
+        <p>Bem-vindo ao sistema</p>
+    </div>
+
+    <section>
+        <div id="prin">
+            <h2>Administrar usuários</h2>
+            <div id="buscarId">
+                <h2>Buscar usuário</h2>
+                <label id="idU" for="getUserId">ID</label><br>
+                <input type="number" placeholder="Digite o ID do usuário..." id="getUserId" min="0" required><br>
+                <button id="buscarID" onclick="getUser()">Buscar</button><br><br>
+            </div>
+            <div id="att">
+                <h2>Gerenciar usuário</h2>
+                <label for="inpuNome">Nome</label><br>
+                <input type="text" placeholder="Digite o nome do usuário..." id="inpuNome" minlength="3" maxlength="35"
+                    required><br>
+
+                <label for="inpuEmail">E-mail</label><br>
+                <input type="email" placeholder="Digite o e-mail do usuário..." id="inpuEmail" minlength="3"
+                    maxlength="35" required><br>
+
+                <label for="inpuSenha">Senha</label><br>
+                <input type="password" placeholder="Digite a senha do usuário.." id="inpuSenha" minlength="4"
+                    maxlength="35" required><br>
+
+                <div id="ender">
+                    <summary>Endereço</summary>
+                    <label>Cep
+                        <input name="cep" type="text" id="cep" value="" size="10" maxlength="9"
+                        onblur="pesquisacep(this.value)" placeholder="Digite seu CEP..." required></label><br>
+                    <label>Rua
+                        <input name="rua" type="text" id="rua" size="60" placeholder="Digite sua rua..."
+                            required></label><br>
+                    <label>Bairro
+                        <input name="bairro" type="text" id="bairro" size="40" placeholder="Digite seu bairro..."
+                            required></label><br>
+                    <label>Cidade
+                        <input name="cidade" type="text" id="cidade" size="40" placeholder="Digite sua cidade..."
+                            required></label><br>
+                    <label>Estado
+                        <input name="uf" type="text" id="uf" size="2" placeholder="Digite seu estado..."
+                            required></label><br>
+                </div>
+                <div id="botoes">
+                    <button id="attID" onclick="updateUser()">Atualizar</button>
+                    <button id="excID" onclick="deleteUser()">Excluir</button>
+                </div>
+            </div>
+        </div>
+        <div id="map"></div>
+    </section>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="js/cep.js"></script>
+    <script src="js/getUser.js"></script>
+    <script src="js/updateUser.js"></script>
+    <script src="js/deleteUser.js"></script>
+</body>
+
+</html>
