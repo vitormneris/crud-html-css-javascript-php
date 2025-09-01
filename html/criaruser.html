@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Web</title>
+    <link rel="stylesheet" href="../css/estilocriarusua.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+</head>
+
+<body>
+    <a class="back-button" href="../index.html">
+        <p class="button-text">Voltar</p>
+    </a>
+    <div class="card-gretting" id="resposta">
+        <p class="button-text">Bem-vindo ao sistema</p>
+    </div>
+    <div class="form">
+        <h1 class="title">Cadastro de usuário</h1>
+        <div class="container">
+            <div class="subcontainer">
+                <h2 class="subtitle">Usuário</h2>
+
+                <div class="input-container">
+                    <label class="label" for="nome">Nome</label>
+                    <input class="input" type="text" placeholder="Ex: João Silva" id="nome" name="nome" minlength="3"
+                        maxlength="35">
+                </div>
+
+                <div class="input-container">
+                    <label class="label" for="email">E-mail</label>
+                    <input class="input" type="email" placeholder="Ex: usuario@gmail.com" id="email" name="email"
+                        minlength="3" maxlength="35">
+                </div>
+
+                <div class="input-container">
+                    <label class="label" for="senha">Senha</label>
+                    <input class="input" type="password" placeholder="Ex: 12345678" id="senha" name="senha"
+                        minlength="8" maxlength="35">
+                </div>
+            </div>
+            <div class="container-bottom">
+                <div class="subcontainer">
+                    <h2 class="subtitle">Endereço</h2>
+
+                    <div class="input-container">
+                        <label class="label" for="cep">CEP</label>
+                        <input class="input" name="cep" type="text" id="cep" value="" size="10" maxlength="9"
+                            onblur="pesquisaCep(this.value)" placeholder="Ex: 00000-000">
+                    </div>
+
+                    <div class="input-container">
+                        <label class="label" for="uf">Estado</label>
+                        <input class="input" name="uf" type="text" id="uf" size="2" placeholder="Ex: SP">
+                    </div>
+
+                    <div class="input-container">
+                        <label class="label" for="cidade">Cidade</label>
+                        <input class="input" name="cidade" type="text" id="cidade" size="40"
+                            placeholder="Ex: Guarulhos">
+                    </div>
+
+                    <div class="input-container">
+                        <label class="label" for="bairro">Bairro</label>
+                        <input class="input" name="bairro" type="text" id="bairro" size="40" placeholder="Ex: Limoeiro">
+                    </div>
+
+                    <div class="input-container">
+                        <label class="label" for="rua">Rua</label>
+                        <input class="input" name="rua" type="text" id="rua" size="60"
+                            placeholder="Ex: Rua Antonio Santos">
+                    </div>
+                </div>
+                <div class="subcontainer-map" id="map"></div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="button" type="button" id="submitButton">
+                <span class="button-text">Cadastrar</span>
+            </button>
+            <button class="button" type="reset">
+                <span class="button-text">Limpar</span>
+            </button>
+        </div>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="../js/cep.js"></script>
+    <script type="module" src="../api/user/createUser.js"></script>
+</body>
+
+</html>

@@ -4,28 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuários e produtos</title>
+    <title>Sistema Web</title>
     <link rel="stylesheet" href="css/estilo.css">
 </head>
 
 <body>
-    <section>
-        <div>
-            <h1>Escolha uma opção</h1>
-            <div id="usuario">
-                <h2>Usuário</h2>
-                <a href="criaruser.html">Cadastrar</a><br><br>
-                <a href="todosuser.html">Listar usuários</a><br><br>
-                <a href="buscauser.html">Buscar</a><br><br>
-            </div>
-            <div id="produto">
-                <h2>Produto</h2>
-                <a href="criarprod.html">Cadastrar</a><br><br>
-                <a href="todosprod.html">Listar produtos</a><br><br>
-                <a href="buscaprod.html">Buscar</a>
-            </div>
+    <h1 class="title">Bem-vindo ao sistema!</h1>
+    <div class="container">
+        <div class="subcontainer">
+            <h2 class="subtitle">Usuário</h2>
+            <a class="nav-button" href="html/criaruser.html">
+                <p class="text">Cadastrar</p>
+            </a>
+            <a class="nav-button" href="html/todosuser.html">
+                <p class="text">Listar todos</p>
+            </a>
+            <a class="nav-button" href="html/buscauser.html">
+                <p class="text">Atualizar</p>
+            </a>
         </div>
-    </section>
+        <div class="subcontainer">
+            <h2 class="subtitle">Produto</h2>
+            <a class="nav-button" href="html/criarprod.html">
+                <p class="text">Cadastrar</p>
+            </a>
+            <a class="nav-button" href="html/todosprod.html">
+                <p class="text">Listar todos</p>
+            </a>
+            <a class="nav-button" href="html/buscaprod.html">
+                <p class="text">Atualizar</p>
+            </a>
+        </div>
+    </div>
     <script>
         window.onload = function () {
             fetch('/backend/token')

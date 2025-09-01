@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Web</title>
+    <link rel="stylesheet" href="../css/estilotodos.css">
+</head>
+
+<body>
+    <a class="back-button" href="../index.html">
+        <p class="button-text">Voltar</p>
+    </a>
+    <div class="card-gretting" id="resposta">
+        <p class="button-text">Bem-vindo ao sistema</p>
+    </div>
+    <div class="container" id="divPerso">
+        <h2 class="title">Lista de produtos</h2>
+        <button class="button" id="getAllButton" type="submit" onclick="getAllProd()">
+            <span class="button-text">Listar os produtos</span>
+        </button>
+        <div id="produtosList"></div>
+    </div>
+    <script type="module" src="../api/product/getAllProd.js"></script>
+</body>
+
+</html>

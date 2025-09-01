@@ -1,141 +1,141 @@
-body {
-    background: linear-gradient(90deg, rgba(94,94,94,1) 0%, rgba(226,226,226,1) 14%, rgba(255,255,255,1) 33%,
-    rgba(253,253,253,1) 78%, rgba(220,220,220,1) 89%, rgba(98,98,98,1) 100%);
-    font-family: monospace;
-    font-size: 20px;
+* {
+    padding: 0;
+    margin: 0;
+    vertical-align: baseline;
+    list-style: none;
+    border: 0
 }
 
-section {
+body {
+    background: #fd8a17
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    border: 5px solid black;
+    border-radius: 20px;
+    margin: 30px;
+    min-width: 70%;
+}       
+
+.subcontainers {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.subcontainer {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 60%;
+    height: 90%;
+    border-radius: 40px;
+    border: 3px solid black;
+    margin: 30px;
+    padding: 20px;
+    background-color: black;
+}
+
+.title {
+    color: black;
+    font-size: 40px;
+    font-family: sans-serif;
+    font-weight: bolder;
+    text-align: center;
+    padding: 10px;
+}
+
+.label {
+    color: white;
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: bolder;
+}
+
+.subtitle {
+    color: white;
+    font-size: 30px;
+    font-family: sans-serif;
+    font-weight: bolder;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    justify-items: start;
+    width: 60%;
+    height: 100%;
+    margin: 10px;
+}
+
+.input {
+    display: flex;
+    align-self: center;
+    background-color: rgb(255, 255, 255);
+    font-size: 20px;
+    text-decoration: none;
+    border-radius: 15px;
+    margin: 10px;
+    padding: 15px 20px;
+    width: 100%;
+}
+
+.buttons {
     display: flex;
     flex-direction: row;
 }
 
-div {   
-    width: 1000px;
-    height: 650px;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.3);
-    border: 5px solid rgb(0, 0, 0);
-    border-radius: 40px;
-}
-
-div#att {
-    position: relative;
-    left: 500px;
-    bottom: 360px;   
-    width: 420px;
-    height: 480px;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.3);
-    border: 3px solid rgb(0, 0, 0);
-    border-radius: 40px;
-}
-
-div#buscarId {
-    margin-left: 70px;  
-    width: 370px;
-    height: 350px;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.3);
-    border: 3px solid rgb(0, 0, 0);
-    border-radius: 40px;
-}
-
-div#resposta {
-    position: relative;
-    left: 550px;
-    height: 50px;
-    width: 400px;
-    margin-bottom: 20px;
-    background-color: rgba(0, 0, 0, 0.2);
-    border: 3px solid rgb(0, 0, 0);
-    border-radius: 100px;
-    text-align: center;
-}
-
-p {
-    position: relative;
-    bottom: 8px; 
-    font: bold 20px monospace;
-    color: rgb(54, 54, 54);   
-}
-
-h2 {
-    color: rgb(0, 0, 0);
-    font-size: 40px;
-    font: bolder;
-}
-
-a:link {
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    border: 2px solid white;
-    padding: 7px 25px;
-    text-align: center;
+.button {
+    display: block;
+    background-color: #fd8a17;
     text-decoration: none;
-    display: inline-block;
-    border-radius: 15px;
-
+    border-radius: 25px;
+    margin: 15px;
+    padding: 15px 20px;
 }
 
-a:visited {
-    color: white;
-}
-
-a:hover {
-    color: rgb(127, 110, 255);
-    background-color: black;
-    border: 2px solid rgb(127, 110, 255);
+.button:hover {
     transition: 0.5s;
     transform: scale(1.1, 1.1);
 }
 
-input {
-    background-color: rgba(255, 255, 255, 0.7); 
-    border: 3px solid rgb(0, 0, 0);
-    border-radius: 10px;
-    margin-bottom: 22px;
-    height: 30px;
-    width: 270px;
-    font: bold 16px monospace;
-}
-
-input#getUserId {
-    width: 220px;
-}
-
-input#getProdutoId {
-    width: 220px;
-}
-
-label {
-    position: relative;
+.button-text {
     color: black;
-    font-size: 28px;
-}
-
-button {
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid white;
-    padding: 8px 12px;
-    margin-top: 20px;
-    border-radius: 15px;
-    font-family: monospace;
     font-size: 20px;
+    font-family: sans-serif;
+    font-weight: bolder;
+    text-align: center;
 }
 
-button:hover {
-    color: rgb(127, 110, 255);
-    background-color: black;
-    border: 2px solid rgb(127, 110, 255);
+.back-button {
+    display: block;
+    position: fixed;
+    background-color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    margin: 15px;
+    padding: 15px 20px;
+    min-width: 5%;
+}
+
+.back-button:hover {
     transition: 0.5s;
-    border-radius: 15px;
-    font-family: monospace;
-    font-size: 20px;
     transform: scale(1.1, 1.1);
+}
+
+.card-gretting {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    background-color: white; 
+    padding: 15px 25px;
+    margin: 10px;
+    border-radius: 15px;
 }

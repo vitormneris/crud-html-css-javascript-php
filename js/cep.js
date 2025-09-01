@@ -1,46 +1,23 @@
-var mapa = L.map('map').setView([0, 0], 2);
+var mapa = L.map('map').setView([0, 0], 2)
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
-}).addTo(mapa);
+}).addTo(mapa)
 
-mapa.scrollWheelZoom.disable();
+mapa.scrollWheelZoom.disable()
 
 function buscarLocal(lat, lon) {
-    mapa.setView([lat, lon], 15);
-    var pontoMarcador = L.marker([lat, lon]).addTo(mapa);
-    pontoMarcador.bindPopup('Você está aqui').openPopup();
-}
-
-function animarSuc() {
-    resultado.style.transition = '1s';
-    resultado.style.background = 'rgb(52, 255, 29, 0.7)';
-    window.scrollTo(0, 0);
-    animar();
-}
-
-function animarErr() {
-    resultado.style.transition = '1s';
-    resultado.style.background = 'rgb(250, 11, 11, 0.7)';
-    window.scrollTo(0, 0);
-    animar();
-}
-
-function animar() {
-    setTimeout(function () {
-        resultado.style.transition = '1s';
-        resultado.style.background = 'rgba(0, 0, 0, 0.2)';
-    }, 2000);
+    mapa.setView([lat, lon], 15)
+    var pontoMarcador = L.marker([lat, lon]).addTo(mapa)
+    pontoMarcador.bindPopup('Você está aqui').openPopup()
 }
 
 function mostrarMapa(cep) {
     if (!cep) {
-        resultado.innerHTML = '<p>CEP não encontrado</p>';
-        animarErr();
+        animarErr('<p>CEP não encontrado</p>')
     }
 
-    const resultado = document.getElementById('resposta');
-    const chave = '22acd8a06ed44f17b5fa98ba2d9b7e54';
+    const chave = 'd2841bef49aa4227aa7780a7731eb608'
 
     fetch(`https://api.opencagedata.com/geocode/v1/json?q=${cep}&key=${chave}`)
         .then(response => response.json())
@@ -50,66 +27,54 @@ function mostrarMapa(cep) {
                     latitude: data.results[0].geometry.lat,
                     longitude: data.results[0].geometry.lng
                 }
-                buscarLocal(coordenadas.latitude, coordenadas.longitude);
+                buscarLocal(coordenadas.latitude, coordenadas.longitude)
             } else {
-                resultado.innerHTML = '<p>CEP não encontrado</p>';
-                animarErr();
+                animarErr('<p>CEP não encontrado</p>')
             }
         })
-        .catch(error => resultado.innerHTML = '<p>Erro ao exibir o mapa</p>');
+        .catch(error => animarErr('<p>Erro ao exibir o mapa</p>'))
 }
 
-function limpa_formulário_cep() {
-    document.getElementById('rua').value = ("");
-    document.getElementById('bairro').value = ("");
-    document.getElementById('cidade').value = ("");
-    document.getElementById('uf').value = ("");
-}
-
-function meu_callback(conteudo) {
+function meuCallback(conteudo) {
     if (!("erro" in conteudo)) {
-        document.getElementById('rua').value = (conteudo.logradouro);
-        document.getElementById('bairro').value = (conteudo.bairro);
-        document.getElementById('cidade').value = (conteudo.localidade);
-        document.getElementById('uf').value = (conteudo.uf);
+        document.getElementById('rua').value = (conteudo.logradouro)
+        document.getElementById('bairro').value = (conteudo.bairro)
+        document.getElementById('cidade').value = (conteudo.localidade)
+        document.getElementById('uf').value = (conteudo.uf)
     }
     else {
-        limpa_formulário_cep();
-        resultado.innerHTML = '<p>CEP não encontrado</p>';
-        animarErr();
+        modificarFormularioCep()
+        animarErr('<p>CEP não encontrado</p>')
     }
 }
 
-function pesquisacep(valor) {
-    var cep = valor.replace(/\D/g, '');
+function pesquisaCep(valor) {
+    var cep = valor.replace(/\D/g, '')
     if (cep != "") {
-        var validacep = /^[0-9]{8}$/;
+        var validacep = /^[0-9]{8}$/
         if (validacep.test(cep)) {
-            mostrarMapa(cep);
-            document.getElementById('rua').value = "...";
-            document.getElementById('bairro').value = "...";
-            document.getElementById('cidade').value = "...";
-            document.getElementById('uf').value = "...";
+            mostrarMapa(cep)
+            modificarFormularioCep("...")
 
             var requestOptions = {
                 method: 'GET',
                 redirect: 'follow'
-            };
+            }
 
             fetch("https://viacep.com.br/ws/" + cep + "/json/", requestOptions)
                 .then(response => response.json())
-                .then(data => meu_callback(data))
-                .catch(error => console.log('error', error));
+                .then(data => meuCallback(data))
+                .catch(error => animarErr('Erro: ', error))
         }
         else {
-            limpa_formulário_cep();
-            resultado.innerHTML = '<p>Formato de CEP inválido</p>';
-            animarErr();
+            animarErr('<p>Formato de CEP inválido</p>')
         }
     }
-    else {
-        limpa_formulário_cep();
-    }
-};
+}
 
-
+function modificarFormularioCep(text = "") {
+    document.getElementById('rua').value = (text)
+    document.getElementById('bairro').value = (text)
+    document.getElementById('cidade').value = (text)
+    document.getElementById('uf').value = (text)
+}

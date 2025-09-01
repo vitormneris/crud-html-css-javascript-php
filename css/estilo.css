@@ -1,76 +1,78 @@
-body {
-    background: linear-gradient(90deg, rgba(94,94,94,1) 0%, rgba(226,226,226,1) 14%, rgba(255,255,255,1) 33%,
-     rgba(253,253,253,1) 78%, rgba(220,220,220,1) 89%, rgba(98,98,98,1) 100%);
-    font-family: monospace;
-    font-size: 20px;
+* {
+    padding: 0;
+    margin: 0;
+    vertical-align: baseline;
+    list-style: none;
+    border: 0
 }
 
-section {
-    justify-content: center;
-    align-items: center;
+body {
+    background: #fd8a17
+}
+
+.container {
     display: flex;
     flex-direction: row;
-}
-
-div {   
-    width: 950px;
-    height: 600px;
-    margin-top: 50px;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.3);
+    justify-self: center;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 70vw;
+    min-height: 70vh;
+    background-color: white;
     border: 5px solid rgb(0, 0, 0);
+    border-radius: 20px;
+    margin: 30px;
+}
+
+.subcontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
     border-radius: 40px;
-}
-
-div#produto {
-    position: relative;
-    left: 500px;
-    bottom: 405px;   
-    width: 370px;
-    height: 350px;
-    border-radius: 80px;
     border: 3px solid rgb(0, 0, 0);
+    margin: 30px;
+    padding: 20px;
+    background-color: rgb(0, 0, 0);
 }
 
-div#usuario {
-    margin-left: 70px;  
-    width: 370px;
-    height: 350px;
-    border-radius: 80px;
-    border: 3px solid rgb(0, 0, 0);
-}
-
-h1 {
-    color:rgb(0, 0, 0);
-    font-size: 42px;
-    font: bolder;
-}
-
-h2 {
-    color:rgb(0, 0, 0);
-    font-size: 35px;
-}
-
-a:link {
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    border: 2px solid white;
-    padding: 7px 25px;
+.title {
+    color: rgb(0, 0, 0);
+    font-size: 40px;
+    font-family: sans-serif;
+    font-weight: bolder;
     text-align: center;
+    padding: 30px;
+}
+
+.subtitle {
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    font-family: sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+.text {
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.nav-button {
+    display: block;
+    background-color: rgb(255, 255, 255);
     text-decoration: none;
-    display: inline-block;
-    border-radius: 15px;
-
+    border-radius: 25px;
+    margin: 10px;
+    padding: 15px 20px;
+    width: 40%;
 }
 
-a:visited {
-    color: white;
-}
-
-a:hover {
-    color: rgb(127, 110, 255);
-    background-color: black;
-    border: 2px solid rgb(127, 110, 255);
+.nav-button:hover {
     transition: 0.5s;
     transform: scale(1.1, 1.1);
 }

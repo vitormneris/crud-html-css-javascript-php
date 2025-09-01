@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/estilobuscaprod.css">
+    <title>Sistema Web</title>
+</head>
+
+<body>
+    <a class="back-button" href="../index.html">
+        <p class="button-text">Voltar</p>
+    </a>
+    <div class="card-gretting" id="resposta">
+        <p class="button-text">Bem-vindo ao sistema</p>
+    </div>
+    <div class="container">
+        <h2 class="title">Administrar produtos</h2>
+        <div class="subcontainers">
+            <div class="subcontainer">
+                <h2 class="subtitle">Buscar produto</h2>
+
+                <div class="input-container">
+                    <label class="label" id="idP" for="produtoId">ID</label>
+                    <input class="input" type="number" placeholder="Digite o ID do produto..." id="produtoId" min="0">
+                </div>
+
+                <button id="buscarID" class="button" type="button">
+                    <span class="button-text">Buscar</span>
+                </button>
+            </div>
+
+            <div class="subcontainer">
+
+                <h2 class="subtitle">Produto</h2>
+                <div class="input-container">
+                    <label class="label" for="nome">Nome</label>
+                    <input class="input" type="text" placeholder="Ex: Café" id="nome" minlength="2" maxlength="35">
+                </div>
+                <div class="input-container">
+                    <label class="label" for="preco">Preço</label>
+                    <input class="input" type="number" placeholder="Ex: 40,00" id="preco" min="0">
+                </div>
+                <div class="input-container">
+                    <label class="label" id="lbQuantidade" for="quant">Quantidade</label>
+                    <input class="input" type="number" placeholder="Ex: 12" id="quant" min="1">
+                </div>
+
+                <div class="buttons">
+                    <button class="button" id="attID" type="button">
+                        <span class="button-text">Atualizar</span>
+                    </button>
+                    <button class="button" id="excID" type="button">
+                        <span class="button-text">Excluir</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="../api/product/getProd.js"></script>
+    <script type="module" src="../api/product/updateProd.js"></script>
+    <script type="module" src="../api/product/deleteProd.js"></script>
+</body>
+
+</html>

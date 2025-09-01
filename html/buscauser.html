@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/estilobuscausua.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <title>Sistema Web</title>
+</head>
+
+<body>
+    <a class="back-button" href="../index.html">
+        <p class="button-text">Voltar</p>
+    </a>
+    <div class="card-gretting" id="resposta">
+        <p class="button-text">Bem-vindo ao sistema</p>
+    </div>
+    <div class="white-card">
+        <h1 class="title">Atualizar usuário</h1>
+        <div class="container">
+            <div class="container-left">
+                <div class="subcontainer">
+                    <h2 class="subtitle">Usuário</h2>
+
+                    <div class="input-container">
+                        <label class="label" for="nome">Nome</label>
+                        <input class="input" type="text" placeholder="Ex: João Silva" id="nome" minlength="3"
+                            maxlength="35">
+                    </div>
+
+                    <div class="input-container">
+                        <label class="label" for="email">E-mail</label>
+                        <input class="input" type="email" placeholder="Ex: usuario@gmail.com" id="email" minlength="3"
+                            maxlength="35">
+                    </div>
+
+                    <div class="input-container">
+                        <label class="label" for="senha">Senha</label>
+                        <input class="input" type="password" placeholder="Ex: 12345678" id="senha" minlength="4"
+                            maxlength="35">
+                    </div>
+                </div>
+                <div class="subcontainer-map" id="map"></div>
+            </div>
+
+            <div class="container-right">
+                <div class="subcontainer">
+                    <h2 class="subtitle">Buscar usuário</h2>
+
+                    <div class="input-container">
+                        <label class="label" id="idU" for="getUserId">ID</label>
+                        <input class="input" type="number" placeholder="Digite o ID do usuário..." id="getUserId"
+                            min="0">
+                    </div>
+
+                    <button id="buscarID" class="button" type="button">
+                        <span class="button-text">Buscar</span>
+                    </button>
+                </div>
+
+                <div class="subcontainer">
+                    <h2 class="subtitle">Endereço</h2>
+
+                    <div class="input-container">
+                        <label class="label" for="cep">CEP</label>
+                        <input class="input" type="text" id="cep" value="" size="10" maxlength="9"
+                            onblur="pesquisaCep(this.value)" placeholder="Ex: 00000-000">
+                    </div>
+
+                    <div class="input-container">
+                        <label class="label" for="uf">Estado</label>
+                        <input class="input" type="text" id="uf" size="2" placeholder="Ex: SP">
+                    </div>
+
+                    <div class="input-container">
+                        <label class="label" for="cidade">Cidade</label>
+                        <input class="input" type="text" id="cidade" size="40" placeholder="Ex: Guarulhos">
+                    </div>
+
+                    <div class="input-container">
+                        <label class="label" for="bairro">Bairro</label>
+                        <input class="input" type="text" id="bairro" size="40" placeholder="Ex: Limoeiro">
+                    </div>
+
+                    <div class="input-container">
+                        <label class="label" for="rua">Rua</label>
+                        <input class="input" type="text" id="rua" size="60" placeholder="Ex: Rua Antonio Santos">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="button" id="attID" type="button">
+                <span class="button-text">Atualizar</span>
+            </button>
+            <button class="button" id="excID" type="button">
+                <span class="button-text">Excluir</span>
+            </button>
+        </div>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="../js/cep.js"></script>
+    <script type="module" src="../api/user/getUser.js"></script>
+    <script type="module" src="../api/user/updateUser.js"></script>
+    <script type="module" src="../api/user/deleteUser.js"></script>
+</body>
+
+</html>
