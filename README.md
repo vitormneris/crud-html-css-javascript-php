@@ -25,7 +25,7 @@ Com elas, é possível realizar operações de **cadastro, listagem, edição e 
 ## Como Executar
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/projeto-crud-simples.git
+   git clone https://github.com/vitormneris/crud-html-css-javascript-php.git
 2. Execute na pasta raiz do projeto (use outra porta caso já tiver algum serviço rodando na porta 8080):
    ```bash
    php -S localhost:8080
