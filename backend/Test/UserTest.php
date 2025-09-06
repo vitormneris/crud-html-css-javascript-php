@@ -4,15 +4,18 @@ namespace App\Test;
 
 use App\Classes\Model;
 
-class UserTest {
+class UserTest
+{
 
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = new Model();
     }
 
-    public function runTests() {
+    public function runTests()
+    {
         echo "CRUD tests...<br>";
         $this->select();
         $this->insert();
@@ -22,7 +25,8 @@ class UserTest {
         $this->delete();
         $this->select();
     }
-    public function select(){
+    public function select()
+    {
         echo "<b>SELEÇÃO:</b>";
         $user = $this->db->select('users');
         echo "Test do Select " . count($user)  . " users.\n";
@@ -33,14 +37,16 @@ class UserTest {
         }
         echo "<hr>";
     }
-    public function insert(){
+    public function insert()
+    {
         echo "<b>INSERÇÃO:</b>";
         $data = ['nome' => 'testUser', 'email' => 'testPass@xxx.com', 'senha' => '123456'];
         $result = $this->db->insert('users', $data);
         echo "Teste do Insert: " . ($result ? "Sucesso" : "Falha") . "\n";
         echo "<hr>";
     }
-    public function update(){
+    public function update()
+    {
         echo "<b>ATUALIZAÇÃO:</b>";
         $newData = ['nome' => 'updatedUser'];
         $conditions = ['nome' => 'testUser'];
@@ -48,7 +54,8 @@ class UserTest {
         echo "Update : " . ($result ? "Sucesso" : "Falha") . "\n";
         echo "<hr>";
     }
-    public function delete(){
+    public function delete()
+    {
         echo "<b>EXCLUSÃO:</b>";
         $conditions = ['nome' => 'updatedUser'];
         $result = $this->db->delete('users', $conditions);

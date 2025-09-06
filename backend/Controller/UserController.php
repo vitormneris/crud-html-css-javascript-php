@@ -2,79 +2,95 @@
 
 namespace App\Controller;
 
-use App\Classes\Model;
-use App\Classes\Usuario;
-use App\Classes\Endereco;
-use App\Controller\EnderecoController;
-
+use App\Model\Model;
+use App\Entity\Usuario;
+use App\Entity\Endereco;
 
 class UserController
 {
-
-    private $db;
-    private $usuarios;
-    private $enderecos;
-    private $controllerenderecos;
+    private $_db;
 
     public function __construct()
     {
         $this->db = new Model();
-        $this->usuarios = new Usuario();
-        $this->enderecos = new Endereco();
-      //  $this->db->criarTabelaEndereco();
     }
 
-    public function select()
+    public function findAll(): array
     {
-        $user = $this->db->select('users');
+        $user = $this->_db->select('usuarios');
         return  $user;
     }
 
-    public function selectId($id)
+    public function findAllById($id): array
     {
-        $user = $this->db->select('users', ['id' => $id]);
+        $user = $this->_db->select('usuarios', ['id' => $id]);
         return  $user;
     }
 
-    public function insert($data)
+    public function insert($data): bool
     {
-        $this->usuarios->setNome($data['nome']);
-        $this->usuarios->setEmail($data['email']);
-        $this->usuarios->setSenha($data['senha']);
-        if ($this->db->insert(
-            'users',
-            [
-                'nome' => $this->usuarios->getNome(),
-                'email' => $this->usuarios->getEmail(),
-                'senha' => $this->usuarios->getSenha()
-            ]
-        )) {
-            $iduser = $this->db->getLastInsertId();
-            $this->enderecos->setCep($data['cep']);
-            $this->enderecos->setRua($data['rua']);
-            $this->enderecos->setBairro($data['bairro']);
-            $this->enderecos->setCidade($data['cidade']);
-            $this->enderecos->setUf($data['uf']);
-            $this->enderecos->setIduser($iduser);
-            $this->controllerenderecos = new EnderecoController();
-            if ($this->controllerenderecos->insert($this->enderecos)) {
+        $usuario = new Usuario();
+        $usuario->setNome(nome: $data['nome']);
+        $usuario->setEmail(email: $data['email']);
+        $usuario->setSenha(senha: $data['senha']);
+
+        if ($this->_db->insert('usuarios', $usuario->toArray())) {
+            $userId = $this->_db->getLastInsertId();
+
+            $endereco = new Endereco();
+            $endereco->setCep(cep: $data['cep']);
+            $endereco->setUf(uf: $data['uf']);
+            $endereco->setCidade(cidade: $data['cidade']);
+            $endereco->setBairro(bairro: $data['bairro']);
+            $endereco->setRua(rua: $data['rua']);
+            $endereco->setUsuarioId(usuarioId: $userId);
+            
+            if ($this->_db->insert('enderecos', $endereco->toArray())) {
                 return true;
             }
         }
         return false;
     }
 
-    public function update($newData, $condition)
+    public function update($newData, $userId): bool
     {
-        if ($this->db->update('users', $newData, ['id' => $condition])) {
-            return true;
+        $usuario = new Usuario();
+        $usuario->setNome(nome: $newData['nome']);
+        $usuario->setEmail(email: $newData['email']);
+        $usuario->setSenha(senha: $newData['senha']);
+
+        $usuarioAtualizado = $this->_db->update(
+            'usuarios', 
+            $usuario->toArray(), 
+            ['id' => $userId]
+        );
+
+        if ($usuarioAtualizado) {
+          
+            $endereco = new Endereco();
+            $endereco->setCep(cep: $newData['cep']);
+            $endereco->setUf(uf: $newData['uf']);
+            $endereco->setCidade(cidade: $newData['cidade']);
+            $endereco->setBairro(bairro: $newData['bairro']);
+            $endereco->setRua(rua: $newData['rua']);
+            $endereco->setUsuarioId(usuarioId: $userId);
+
+            $enderecoAtualizado = $this->_db->update(
+                'enderecos', 
+                $endereco->toArray(), 
+                ['usuarioId' => $userId]
+            );
+            
+            if ($enderecoAtualizado) {
+                return true;
+            }
         }
         return false;
     }
 
-    public function delete($conditions)
+    public function delete($id): bool
     {
-        if ($this->db->delete('users', ['id' => $conditions])) {
+        if ($this->_db->delete('usuarios', ['id' => $id])) {
             return true;
         }
         return false;

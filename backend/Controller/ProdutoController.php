@@ -2,42 +2,71 @@
 
 namespace App\Controller;
 
-use App\Classes\Model;
+use App\Model\Model;
+use App\Entity\Produto;
 
-class ProdutoController {
+class ProdutoController
+{
+    private $_db;
 
-    private $db;
-
-    public function __construct() {
-        $this->db = new Model();
+    public function __construct()
+    {
+        $this->_db = new Model();
     }
 
-    public function select(){
-        $produto = $this->db->select('produtos');
+    public function findAll(): array
+    {
+        $produto = $this->_db->select(table: 'produtos');
         return  $produto;
     }
 
-    public function selectId($id){
-        $produto = $this->db->select('produtos', ['id' => $id]);
+    public function findById($id): array
+    {
+        $produto = $this->_db->select(table: 'produtos', conditions: ['id' => $id]);
         return  $produto;
     }
 
-    public function insert($data){
-        if($this->db->insert('produtos', $data)){
+    public function insert($data): bool
+    {
+        $produto = new Produto();
+        $produto->id = $data['id'];
+        $produto->name = $data['nome'];
+        $produto->price = $data['preco'];
+        $produto->quantity = $data['quantidade'];
+
+        if ($this->_db->insert(table: 'produtos', data: $produto->toArray())) {
             return true;
         }
         return false;
     }
 
-    public function update($newData, $condition){
-        if($this->db->update('produtos', $newData, ['id' => $condition])){
+    public function update($newData, $id): bool
+    {
+
+        $produto = new Produto();
+        $produto->id = $newData['id'];
+        $produto->name = $newData['nome'];
+        $produto->price = $newData['preco'];
+        $produto->quantity = $newData['quantidade'];
+
+        $sucess = $this->_db->update(
+            table: 'produtos',
+            data: $produto->toArray(),
+            conditions: ['id' => $id]
+        );
+        if ($sucess) {
             return true;
         }
         return false;
     }
     
-    public function delete($conditions){
-        if($this->db->delete('produtos', ['id' => $conditions])){
+    public function delete($id): bool
+    {
+        $sucess = $this->_db->delete(
+            table: 'produtos', 
+            conditions: ['id' => $id]
+        );
+        if ($sucess) {
             return true;
         }
         return false;

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<ruleset name="CustomPEARWithoutDocBlocks">
+    <description>PEAR padrão sem exigência de documentação</description>
+    
+    <!-- Usa o padrão PEAR como base -->
+    <rule ref="PEAR">
+        <!-- Exclui as regras de documentação -->
+        <exclude name="PEAR.Commenting.FileComment"/>
+        <exclude name="PEAR.Commenting.ClassComment"/>
+        <exclude name="PEAR.Commenting.FunctionComment"/>
+        <exclude name="PEAR.Commenting.InlineComment"/>
+    </rule>
+    
+    <file>src</file>
+    <file>lib</file>
+    <file>classes</file>
+    
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>node_modules/*</exclude-pattern>
+</ruleset>

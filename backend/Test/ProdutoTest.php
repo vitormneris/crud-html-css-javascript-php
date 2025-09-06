@@ -4,15 +4,18 @@ namespace App\Controller;
 
 use App\Classes\Model;
 
-class ProdutoController {
+class ProdutoController
+{
 
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = new Model();
     }
 
-    public function runTests() {
+    public function runTests()
+    {
         echo "CRUD tests...<br>";
         $this->select();
         $this->insert();
@@ -22,7 +25,8 @@ class ProdutoController {
         $this->delete();
         $this->select();
     }
-    public function select(){
+    public function select()
+    {
         echo "<b>SELEÇÃO:</b>";
         $produto = $this->db->select('produtos');
         echo "Test do Select " . count($produto)  . " produtos.\n";
@@ -33,14 +37,16 @@ class ProdutoController {
         }
         echo "<hr>";
     }
-    public function insert(){
+    public function insert()
+    {
         echo "<b>INSERÇÃO:</b>";
         $data = ['nome' => 'Café', 'preco' => '1,50', 'quantidade' => '5'];
         $result = $this->db->insert('produtos', $data);
         echo "Teste do Insert: " . ($result ? "Sucesso" : "Falha") . "\n";
         echo "<hr>";
     }
-    public function update(){
+    public function update()
+    {
         echo "<b>ATUALIZAÇÃO:</b>";
         $newData = ['nome' => 'Café', 'preco' => '3,50', 'quantidade' => '2'];
         $conditions = ['nome' => 'Café'];
@@ -48,7 +54,8 @@ class ProdutoController {
         echo "Update : " . ($result ? "Sucesso" : "Falha") . "\n";
         echo "<hr>";
     }
-    public function delete(){
+    public function delete()
+    {
         echo "<b>EXCLUSÃO:</b>";
         $conditions = ['nome' => 'Café'];
         $result = $this->db->delete('produtos', $conditions);
