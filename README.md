@@ -15,6 +15,7 @@ Com elas, é possível realizar operações de **cadastro, listagem, edição e 
 - **CSS3**  
 - **JavaScript (ES6+)**  
 - **PHP**  
+- **Sqlite**
 
 ## Objetivos de Aprendizado
 - Compreender os conceitos de **CRUD**.  
