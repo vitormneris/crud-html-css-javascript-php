@@ -3,7 +3,7 @@ import { animarErr, animarSuc } from "../../js/anim.js"
 document.getElementById('attID').addEventListener('click', updateUser)
 
 function updateUser() {
-    const userId = document.getElementById("getUserId").value
+    const userId = document.getElementById("usuarioId").value
     const userName = document.getElementById("nome").value
     const userEmail = document.getElementById("email").value
     const userSenha = document.getElementById("senha").value
@@ -16,10 +16,7 @@ function updateUser() {
     const usuarioAtualizado = {
         nome: userName,
         email: userEmail,
-        senha: userSenha
-    }
-
-    const enderecoAtualizado = {
+        senha: userSenha,
         cep: cepUsuario,
         rua: ruaUsuario,
         bairro: bairroUsuario,
@@ -27,16 +24,16 @@ function updateUser() {
         uf: ufUsuario,
     }
 
-    fetch('/backend/usuarios.php?id=' + userId, {
+    fetch('/backend/routes/usuarios.php?id=' + userId, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify([usuarioAtualizado, enderecoAtualizado])
+        body: JSON.stringify(usuarioAtualizado)
     })
         .then(response => {
             if (!response.ok) {
-                if (response.status0 === 401 || response.status1 === 401) {
+                if (response.status === 401) {
                     animarErr('Não autorizado')
                 } else {
                     animarErr('Sem rede ou não conseguiu localizar o recurso')
@@ -45,12 +42,11 @@ function updateUser() {
             return response.json()
         })
         .then(data => {
-            if (!(data.status0 && data.status1)) {
+            if (!data.status) {
                 animarErr('Não foi possível atualizar')
-
             } else {
                 animarSuc('Usuário atualizado')
             }
         })
-        .catch(error => console.log(error))
+        .catch(error => animarErr('Erro inesperado na requisição'))
 }

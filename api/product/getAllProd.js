@@ -3,7 +3,7 @@ import { animarErr, animarSuc } from "../../js/anim.js"
 document.getElementById('getAllButton').addEventListener('click', getAllProd)
 
 function getAllProd() {
-    fetch('/backend/produtos.php', {
+    fetch('/backend/routes/produtos.php', {
         method: 'GET'
     })
     .then(response => {
@@ -17,39 +17,48 @@ function getAllProd() {
         return response.json()
     })
     .then(data => {
-        displayProdutos(data)
+        if (data.status) {
+            displayProdutos(data.data)
+        } else {
+            animarErr('Não há produtos cadastrados')
+        }
     })
-    .catch(error => console.log(error))
+    .catch(error => animarErr('Erro inesperado na requisição'))
 }
 
 function displayProdutos(data) {
-    const produtos = data.produtos  
-    const produtosDiv = document.getElementById('produtosList')
-    produtosDiv.innerHTML = '' 
+    const div = document.getElementById('produtosList')
+    div.innerHTML = ''
+    for (let i = 0; i < data.length; i = i + 1) {
+        let wrapper_container = document.createElement('div')
+        wrapper_container.className = 'wrapper-card'
 
-    const list = document.createElement('ul')
+        let container = document.createElement('div')
+        container.className = 'card'
 
-    produtos.forEach(produto => {
-        const listItem = document.createElement('li')
-        const listItem1 = document.createElement('li')
-        const listItem2= document.createElement('li')
-        const listItem3 = document.createElement('li')
-        const pula = document.createElement('br')
+        let p = document.createElement('p')
+        p.className = "field"
+        p.textContent = `ID: ${data[i]['id']}`
+        container.appendChild(p)
 
-        listItem.textContent = `ID: ${produto.id}`
-        list.appendChild(listItem)
+        p = document.createElement('p')
+        p.className = "field"
+        p.textContent = `Nome: ${data[i]['nome']}`
+        container.appendChild(p)
 
-        listItem1.textContent = `Nome: ${produto.nome}`
-        list.appendChild(listItem1)
+        p = document.createElement('p')
+        p.className = "field"
+        p.textContent = `Preco: ${data[i]['preco']}`
+        container.appendChild(p)
 
-        listItem2.textContent = `Preço: R$ ${produto.preco}`
-        list.appendChild(listItem2)
+        p = document.createElement('p')
+        p.className = "field"
+        p.textContent = `Quantidade: ${data[i]['quantidade']}`
+        container.appendChild(p)
 
-        listItem3.textContent = `Quantidade: ${produto.quantidade}`
-        list.appendChild(listItem3)
-
-        list.appendChild(pula)
-    })
-    produtosDiv.appendChild(list)
+        wrapper_container.appendChild(container)
+        div.appendChild(wrapper_container)
+    }
     animarSuc('Produtos listados')
+
 }

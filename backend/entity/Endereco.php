@@ -4,6 +4,7 @@ namespace app\entity;
 
 class Endereco
 {
+    private int $_id;
     private string $_cep;
     private string $_uf;
     private string $_cidade;
@@ -14,6 +15,16 @@ class Endereco
     public function __construct()
     {
 
+    }
+
+    public function getId(): int
+    {
+        return $this->_id;
+    }
+
+    public function setId($id): void
+    {
+        $this->_id = $id;
     }
 
     public function getCep(): string

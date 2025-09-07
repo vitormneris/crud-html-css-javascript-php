@@ -18,7 +18,7 @@ function createProduto() {
         quantidade: quantProduto
     }
 
-    fetch('/backend/produtos.php', { 
+    fetch('/backend/routes/produtos.php', { 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -36,15 +36,14 @@ function createProduto() {
         return response.json()
     })
     .then(data => {
-        if(!data.status){
-            animarErr('Produto já existe')   
-        }
-        else {
-            animarSuc('Produto criado')
+        if (!data.status) {
+            animarErr('Erro ao cadastrar produto')   
+        } else {
             document.getElementById('nome').value = ""
             document.getElementById('preco').value = ""
             document.getElementById('quant').value = ""
+            animarSuc('Produto criado')
         }  
     })
-    .catch(error => console.log(error))
+    .catch(error => animarErr('Erro inesperado na requisição'))
 }

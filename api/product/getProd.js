@@ -4,7 +4,7 @@ document.getElementById('buscarID').addEventListener('click', getProduto)
 
 function getProduto() {
     const produtoId = document.getElementById("produtoId").value
-    fetch('/backend/produtos.php?id=' + produtoId, {
+    fetch('/backend/routes/produtos.php?id=' + produtoId, {
         method: 'GET'
     })
     .then(response => {
@@ -18,21 +18,21 @@ function getProduto() {
         return response.json()
     })
     .then(data => {
-        if(!data.status){
+        if (!data.status) {
             animarErr('Produto não encontrado')
             limpar()
-        }else{
-            document.getElementById("nome").value = data.produto.nome 
-            document.getElementById("preco").value = data.produto.preco 
-            document.getElementById("quant").value = data.produto.quantidade
+        } else {
+            document.getElementById("nome").value = data.data.nome 
+            document.getElementById("preco").value = data.data.preco 
+            document.getElementById("quant").value = data.data.quantidade
             animarSuc('Produto encontrado')
         } 
     })
-    .catch(error => console.log(error))
+    .catch(error => animarErr('Erro inesperado na requisição'))
 }
 
 function limpar() {
     document.getElementById("nome").value = '' 
-    document.getElementById("email").value = '' 
-    document.getElementById("senha").value = ''
+    document.getElementById("preco").value = '' 
+    document.getElementById("quant").value = ''
 }

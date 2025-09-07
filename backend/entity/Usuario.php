@@ -11,7 +11,7 @@ class Usuario
 
     public function __construct()
     {
-      
+        
     }
 
     public function getId(): int

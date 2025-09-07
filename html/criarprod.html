@@ -23,23 +23,20 @@
                 <label class="label" for="nome">Nome</label>
                 <input class="input" type="text" placeholder="Ex: Café" id="nome" minlength="2" maxlength="35">
             </div>
+
             <div class="input-container">
                 <label class="label" for="preco">Preço</label>
                 <input class="input" type="number" placeholder="Ex: 40,00" id="preco" min="0">
             </div>
+
             <div class="input-container">
                 <label class="label" id="lbQuantidade" for="quant">Quantidade</label>
                 <input class="input" type="number" placeholder="Ex: 12" id="quant" min="1">
             </div>
 
-            <div class="buttons">
-                <button class="button" type="button" id="submitButton">
-                    <span class="button-text">Cadastrar</span>
-                </button>
-                <button class="button" type="reset">
-                    <span class="button-text">Limpar</span>
-                </button>
-            </div>
+            <button class="button" type="button" id="submitButton">
+                <span class="button-text">Cadastrar</span>
+            </button>
         </div>
     </div>
     <script type="module" src="../api/product/createProd.js"></script>

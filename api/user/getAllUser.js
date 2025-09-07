@@ -3,14 +3,13 @@ import { animarErr, animarSuc } from "../../js/anim.js"
 document.getElementById('getAllButton').addEventListener('click', getAllUser)
 
 function getAllUser() {
-    fetch('/backend/usuarios.php', {
+    fetch('/backend/routes/usuarios.php', {
         method: 'GET'
     })
     .then(response => {
         if (!response.ok) {
             if (response.status === 401) {
                 animarErr('Não autorizado')
-                
             } else {
                 animarErr('Sem rede ou não conseguiu localizar o recurso')
             }
@@ -18,54 +17,77 @@ function getAllUser() {
         return response.json()
     })
     .then(data => {
-        displayUsers(data)
+        if (data.status) {
+            displayUsers(data.data)
+        } else {
+            animarErr('Não há usuários cadastrados')
+        }
     })
-    .catch(error => console.log(error))
+    .catch(error => animarErr('Erro inesperado na requisição'))
 }
 
 function displayUsers(data) {
-    const users = data.usuarios
-    const ends = data.enderecos
+    const div = document.getElementById('usersList')
+    div.innerHTML = ''
 
-    const usersDiv = document.getElementById('usersList')
-    usersDiv.innerHTML = '' 
+    for (let i = 0; i < data.length; i = i + 1) {
+        let wrapper_container = document.createElement('div')
+        wrapper_container.className = 'wrapper-card'
 
-    const list = document.createElement('ul')
+        let container = document.createElement('div')
+        container.className = 'card'
 
-    for (let i = 0 ; i < users.length ; i = i + 1) {
-        const pula = document.createElement('br')
+        let p = document.createElement('p')
+        p.className = "field"
+        p.textContent = `ID: ${data[i]['id']}`
+        container.appendChild(p)
 
-        const listItemUser0 = document.createElement('li')
-        listItemUser0.textContent = `ID: ${users[i]['id']}`
-        list.appendChild(listItemUser0)
-        const listItemUser1 = document.createElement('li')
-        listItemUser1.textContent = `Nome: ${users[i]['nome']}`
-        list.appendChild(listItemUser1)
-        const listItemUser2 = document.createElement('li')
-        listItemUser2.textContent = `E-mail: ${users[i]['email']}`
-        list.appendChild(listItemUser2)
-        const listItemUser3 = document.createElement('li')
-        listItemUser3.textContent = `Senha: ${users[i]['senha']}`
-        list.appendChild(listItemUser3)
+        p = document.createElement('p')
+        p.className = "field"
+        p.textContent = `Nome: ${data[i]['nome']}`
+        container.appendChild(p)
 
-        const listItemEnd0 = document.createElement('li')
-        listItemEnd0.textContent = `CEP: ${ends[i]['cep']}`
-        list.appendChild(listItemEnd0)
-        const listItemEnd1 = document.createElement('li')
-        listItemEnd1.textContent = `Rua: ${ends[i]['rua']}`
-        list.appendChild(listItemEnd1)
-        const listItemEnd2 = document.createElement('li')
-        listItemEnd2.textContent = `Bairro: ${ends[i]['bairro']}`
-        list.appendChild(listItemEnd2)
-        const listItemEnd3 = document.createElement('li')
-        listItemEnd3.textContent = `Cidade: ${ends[i]['cidade']}`
-        list.appendChild(listItemEnd3)
-        const listItemEnd4 = document.createElement('li')
-        listItemEnd4.textContent = `UF: ${ends[i]['uf']}`
-        list.appendChild(listItemEnd4)
-        
-        list.appendChild(pula)
+        p = document.createElement('p')
+        p.className = "field"
+        p.textContent = `E-mail: ${data[i]['email']}`
+        container.appendChild(p)
+
+        p = document.createElement('p')
+        p.className = "field"
+        p.textContent = `Senha: ${data[i]['senha']}`
+        container.appendChild(p)
+
+        wrapper_container.appendChild(container)
+        container = document.createElement('div')
+        container.className = 'card'
+
+        p = document.createElement('p')
+        p.className = "field"
+        p.textContent = `CEP: ${data[i]['cep']}`
+        container.appendChild(p)
+
+        p = document.createElement('p')
+        p.className = "field"
+        p.textContent = `Estado: ${data[i]['uf']}`
+        container.appendChild(p)
+
+        p = document.createElement('p')
+        p.className = "field"
+        p.textContent = `Cidade: ${data[i]['cidade']}`
+        container.appendChild(p)
+
+        p = document.createElement('p')
+        p.className = "field"
+        p.textContent = `Bairro: ${data[i]['bairro']}`
+        container.appendChild(p);
+
+        p = document.createElement('p')
+        p.className = "field"
+        p.textContent = `Rua: ${data[i]['rua']}`
+        container.appendChild(p);
+
+        wrapper_container.appendChild(container)
+        div.appendChild(wrapper_container)
     }
-    usersDiv.appendChild(list)
     animarSuc('Usuários listados')
 }

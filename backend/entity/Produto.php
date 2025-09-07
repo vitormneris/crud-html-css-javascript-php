@@ -19,10 +19,9 @@ class Produto
         return $this->_id;
     }
 
-    public function setId($id): self
+    public function setId($id): void
     {
         $this->_id = $id;
-        return $this;
     }
 
     public function getNome(): string
@@ -30,10 +29,9 @@ class Produto
         return $this->_nome;
     }
 
-    public function setNome($nome): self
+    public function setNome($nome): void
     {
         $this->_nome = $nome;
-        return $this;
     }
 
     public function getPreco(): string
@@ -41,10 +39,9 @@ class Produto
         return $this->_preco;
     }
 
-    public function setPreco($preco): self
+    public function setPreco($preco): void
     {
         $this->_preco = $preco;
-        return $this;
     }
 
     public function getQuantidade(): string
@@ -52,10 +49,9 @@ class Produto
         return $this->_quantidade;
     }
 
-    public function setQuantidade($quantidade): self
+    public function setQuantidade($quantidade): void
     {
         $this->_quantidade = $quantidade;
-        return $this;
     }
 
     public function toArray(): array 

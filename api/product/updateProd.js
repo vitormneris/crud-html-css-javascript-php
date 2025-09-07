@@ -14,7 +14,7 @@ function updateProduto() {
         quantidade: quantProduto
     }
 
-    fetch('/backend/produtos.php?id=' + produtoId, {
+    fetch('/backend/routes/produtos.php?id=' + produtoId, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -25,7 +25,6 @@ function updateProduto() {
             if (!response.ok) {
                 if (response.status === 401) {
                     animarErr('Não autorizado')
-                    
                 } else {
                     animarErr('Sem rede ou não conseguiu localizar o recurso')
                 }
@@ -34,10 +33,10 @@ function updateProduto() {
         })
         .then(data => {
             if (!data.status) {
-                animarErr('Não pode atualizar')
+                animarErr('Não foi possível atualizar')
             } else {
                 animarSuc('Produto atualizado')
             }
         })
-        .catch(error => console.log(error))
+    .catch(error => animarErr('Erro inesperado na requisição'))
 }

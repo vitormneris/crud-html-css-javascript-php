@@ -4,7 +4,7 @@ document.getElementById('excID').addEventListener('click', deleteProduto)
 
 function deleteProduto() {
     const produtoId = document.getElementById("produtoId").value
-    fetch('/backend/produtos.php?id=' + produtoId, {
+    fetch('/backend/routes/produtos.php?id=' + produtoId, {
         method: 'DELETE'
     })
     .then(response => {
@@ -20,7 +20,7 @@ function deleteProduto() {
     })
     .then(data => {
         if(!data.status){
-            animarErr('Não pode Deletar')    
+            animarErr('Não foi possível deletar')    
         }
         else {
             animarSuc('Produto deletado')
@@ -30,5 +30,5 @@ function deleteProduto() {
             document.getElementById("quant").value = ''         
         } 
     })
-    .catch(error => console.log(error))
+    .catch(error => animarErr('Erro inesperado na requisição'))
 }

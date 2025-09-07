@@ -9,7 +9,7 @@ export function animarSuc(text) {
         div.style.transition = '1s'
         div.style.background = 'rgb(52, 255, 29, 0.7)'
         window.scrollTo(0, 0)
-        animar()
+        animar(div)
     }
 }
 
@@ -24,13 +24,13 @@ export function animarErr(text) {
         div.style.transition = '1s'
         div.style.background = 'rgb(250, 11, 11, 0.7)'
         window.scrollTo(0, 0)
-        animar()
+        animar(div)
     }
 }
 
-function animar() {
+function animar(div) {
     setTimeout(function () {
         div.style.transition = '1s'
-        div.style.background = 'rgba(0, 0, 0, 0.2)'
+        div.style.background = 'rgba(255, 255, 255)'
     }, 2000)
 }

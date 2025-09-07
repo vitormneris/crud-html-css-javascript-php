@@ -3,8 +3,8 @@ import { animarErr, animarSuc } from "../../js/anim.js"
 document.getElementById('buscarID').addEventListener('click', getUser)
 
 function getUser() {
-    const userId = document.getElementById("getUserId").value
-    fetch('/backend/usuarios.php?id=' + userId, {
+    const userId = document.getElementById("usuarioId").value
+    fetch('/backend/routes/usuarios.php?id=' + userId, {
         method: 'GET'
     })
     .then(response => {
@@ -21,25 +21,30 @@ function getUser() {
         if(!data.status){
             animarErr('Usuário não encontrado')
             limpar()
-        }else{
-            document.getElementById("nome").value = data.usuario.nome 
-            document.getElementById("email").value = data.usuario.email 
-            document.getElementById("senha").value = data.usuario.senha
-            document.getElementById('cep').value = data.endereco.cep
-            document.getElementById('rua').value = data.endereco.rua
-            document.getElementById('bairro').value = data.endereco.bairro
-            document.getElementById('cidade').value = data.endereco.cidade
-            document.getElementById('uf').value = data.endereco.uf
+        } else {
+            const usuario = data.data
+            document.getElementById("nome").value = usuario.nome 
+            document.getElementById("email").value = usuario.email 
+            document.getElementById("senha").value = usuario.senha
+            document.getElementById('cep').value = usuario.cep
+            document.getElementById('rua').value = usuario.rua
+            document.getElementById('bairro').value = usuario.bairro
+            document.getElementById('cidade').value = usuario.cidade
+            document.getElementById('uf').value = usuario.uf
+            mostrarMapa(usuario.cep)
             animarSuc('Usuário encontrado')
-            mostrarMapa(data.endereco.cep)
-            
         } 
     })
-    .catch(error => console.log(error))
+    .catch(error => animarErr('Erro inesperado na requisição'))
 }
 
 function limpar() {
     document.getElementById("nome").value = '' 
     document.getElementById("email").value = '' 
     document.getElementById("senha").value = ''
+    document.getElementById('cep').value = ''
+    document.getElementById('rua').value = ''
+    document.getElementById('bairro').value = ''
+    document.getElementById('cidade').value = ''
+    document.getElementById('uf').value = ''
 }

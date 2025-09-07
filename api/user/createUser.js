@@ -47,10 +47,10 @@ function createUser() {
     })
     .then(data => {
         if (!data.status) {
-            animarErr('Usuário já existe')
+            animarErr('Este e-mail já existe')
         }
         else {
-            animarSuc('Usuário criado')
+            animarSuc('Usuário criado com sucesso!')
             document.getElementById('nome').value = ""
             document.getElementById('email').value = ""
             document.getElementById('senha').value = ""
@@ -61,5 +61,5 @@ function createUser() {
             document.getElementById('uf').value = ""
         } 
     })
-    .catch(error => animarErr('Erro na requisição'))
+    .catch(error => animarErr('Erro inesperado na requisição'))
 }

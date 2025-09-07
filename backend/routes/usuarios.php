@@ -8,38 +8,37 @@ use app\controller\UserController;
 
 $usuarioController = new UserController();
 
-$body = json_decode(
-    json: file_get_contents(filename: 'php://input'), 
-    associative: true
-);
+$body = json_decode(file_get_contents('php://input'), true);
 $id = isset($_GET['id']) ? $_GET['id'] : '';
-echo "OXIPORRA"; 
 
 switch ($_SERVER["REQUEST_METHOD"]) {
 case "GET":
     if ($id == "") {
         $resultado = $usuarioController->findAll();
-        echo json_encode(value: ["status" => true, "data" => $resultado]);
+        if ($resultado == []) {
+            echo json_encode(["status" => false, "data" => $resultado]);
+            break;
+        }
+        echo json_encode(["status" => true, "data" => $resultado]);
     } else {
-        $resultado = $usuarioController->findAllById(id: $id);
-        echo json_encode(value: ["status" => true, "data" => $resultado]);
+        $resultado = $usuarioController->findById($id);
+        if ($resultado == []) {
+            echo json_encode(["status" => false, "data" => $resultado]);
+            break;
+        }
+        echo json_encode(["status" => true, "data" => $resultado]);
     }
     break;
 case "POST":
-    echo "OXIPORRA"; 
-    $resultado = $usuarioController->insert(data: $body);
-    echo "VERDADE: " . $resultado; 
-    echo json_encode(value: ["status" => $resultado]);
+    $resultado = $usuarioController->insert($body);
+    echo json_encode(["status" => $resultado]);
     break;
 case "PUT":
-    $resultado = $usuarioController->update(
-        newData: $body,
-        userId: intval(value: $id)
-    );
-    echo json_encode(value: ["status" => $resultado]);
+    $resultado = $usuarioController->update($body, intval($id));
+    echo json_encode(["status" => $resultado]);
     break;
 case "DELETE":
-    $resultado = $usuarioController->delete(id: intval(value: $id));        
-    echo json_encode(value: ["status" => $resultado]);
+    $resultado = $usuarioController->delete(intval($id));        
+    echo json_encode(["status" => $resultado]);
     break; 
 }
