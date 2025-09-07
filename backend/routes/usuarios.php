@@ -1,15 +1,19 @@
 <?php 
 
-namespace App\usuarios;
+namespace app\routes;
 
-require "../vendor/autoload.php";
+require "../../vendor/autoload.php";
 
-use App\Controller\UserController;
+use app\controller\UserController;
 
 $usuarioController = new UserController();
 
-$body = json_decode(file_get_contents('php://input'), true);
+$body = json_decode(
+    json: file_get_contents(filename: 'php://input'), 
+    associative: true
+);
 $id = isset($_GET['id']) ? $_GET['id'] : '';
+echo "OXIPORRA"; 
 
 switch ($_SERVER["REQUEST_METHOD"]) {
 case "GET":
@@ -22,7 +26,9 @@ case "GET":
     }
     break;
 case "POST":
+    echo "OXIPORRA"; 
     $resultado = $usuarioController->insert(data: $body);
+    echo "VERDADE: " . $resultado; 
     echo json_encode(value: ["status" => $resultado]);
     break;
 case "PUT":

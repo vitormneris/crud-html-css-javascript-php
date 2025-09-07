@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace app\controller;
 
-use App\Model\Model;
-use App\Entity\Usuario;
-use App\Entity\Endereco;
+use app\model\Model;
+use app\entity\Usuario;
+use app\entity\Endereco;
 
 class UserController
 {
@@ -12,7 +12,7 @@ class UserController
 
     public function __construct()
     {
-        $this->db = new Model();
+        $this->_db = new Model();
     }
 
     public function findAll(): array
@@ -66,7 +66,6 @@ class UserController
         );
 
         if ($usuarioAtualizado) {
-          
             $endereco = new Endereco();
             $endereco->setCep(cep: $newData['cep']);
             $endereco->setUf(uf: $newData['uf']);
@@ -78,7 +77,7 @@ class UserController
             $enderecoAtualizado = $this->_db->update(
                 'enderecos', 
                 $endereco->toArray(), 
-                ['usuarioId' => $userId]
+                ['usuario_id' => $userId]
             );
             
             if ($enderecoAtualizado) {

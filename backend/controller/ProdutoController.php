@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controller;
+namespace app\controller;
 
-use App\Model\Model;
-use App\Entity\Produto;
+use app\model\Model;
+use app\entity\Produto;
 
 class ProdutoController
 {
@@ -29,10 +29,10 @@ class ProdutoController
     public function insert($data): bool
     {
         $produto = new Produto();
-        $produto->id = $data['id'];
-        $produto->name = $data['nome'];
-        $produto->price = $data['preco'];
-        $produto->quantity = $data['quantidade'];
+        $produto->setId(null);
+        $produto->setNome($data['nome']);
+        $produto->setPreco($data['preco']);
+        $produto->setQuantidade($data['quantidade']);
 
         if ($this->_db->insert(table: 'produtos', data: $produto->toArray())) {
             return true;
@@ -44,10 +44,10 @@ class ProdutoController
     {
 
         $produto = new Produto();
-        $produto->id = $newData['id'];
-        $produto->name = $newData['nome'];
-        $produto->price = $newData['preco'];
-        $produto->quantity = $newData['quantidade'];
+        $produto->setId($newData['id']);
+        $produto->setNome($newData['nome']);
+        $produto->setPreco($newData['preco']);
+        $produto->setQuantidade($newData['quantidade']);
 
         $sucess = $this->_db->update(
             table: 'produtos',

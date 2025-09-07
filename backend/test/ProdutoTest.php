@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Controller;
+namespace app\tests;
 
-use App\Classes\Model;
+use app\model\Model;
 
-class ProdutoController
+class ProdutoTest
 {
 
-    private $db;
+    private $_db;
 
     public function __construct()
     {
-        $this->db = new Model();
+        $this->_db = new Model();
     }
 
     public function runTests()
@@ -28,10 +28,10 @@ class ProdutoController
     public function select()
     {
         echo "<b>SELEÇÃO:</b>";
-        $produto = $this->db->select('produtos');
+        $produto = $this->_db->select('produtos');
         echo "Test do Select " . count($produto)  . " produtos.\n";
-        foreach($produto as $produtos){
-            foreach($produtos as $key => $value){
+        foreach ($produto as $produtos) {
+            foreach ($produtos as $key => $value) {
                 echo '<br>'.$key.': '.$value;
             }
         }
@@ -41,7 +41,7 @@ class ProdutoController
     {
         echo "<b>INSERÇÃO:</b>";
         $data = ['nome' => 'Café', 'preco' => '1,50', 'quantidade' => '5'];
-        $result = $this->db->insert('produtos', $data);
+        $result = $this->_db->insert('produtos', $data);
         echo "Teste do Insert: " . ($result ? "Sucesso" : "Falha") . "\n";
         echo "<hr>";
     }
@@ -50,7 +50,7 @@ class ProdutoController
         echo "<b>ATUALIZAÇÃO:</b>";
         $newData = ['nome' => 'Café', 'preco' => '3,50', 'quantidade' => '2'];
         $conditions = ['nome' => 'Café'];
-        $result = $this->db->update('produtos', $newData, $conditions);
+        $result = $this->_db->update('produtos', $newData, $conditions);
         echo "Update : " . ($result ? "Sucesso" : "Falha") . "\n";
         echo "<hr>";
     }
@@ -58,7 +58,7 @@ class ProdutoController
     {
         echo "<b>EXCLUSÃO:</b>";
         $conditions = ['nome' => 'Café'];
-        $result = $this->db->delete('produtos', $conditions);
+        $result = $this->_db->delete('produtos', $conditions);
         echo "Delete : " . ($result ? "Sucesso" : "Falha") . "\n";
         echo "<hr>";
     }

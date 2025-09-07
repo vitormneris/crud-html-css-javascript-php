@@ -1,10 +1,10 @@
 <?php
 
-namespace App\produtos;
+namespace app\routes;
 
-require "../vendor/autoload.php";
+require "../../vendor/autoload.php";
 
-use App\Controller\ProdutoController;
+use app\controller\ProdutoController;
 
 $produtoController = new ProdutoController();
 
@@ -18,10 +18,10 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 case "GET":
     if ($id == "") {
         $resultado = $produtoController->findAll();
-        echo json_encode(value: ["status" => true, "date" => $resultado]);
+        echo json_encode(value: ["status" => true, "data" => $resultado]);
     } else {
         $resultado = $produtoController->findById(id: $id);
-        echo json_encode(value: ["status" => true, "date" => $resultado[0]]);
+        echo json_encode(value: ["status" => true, "data" => $resultado]);
     }
     break;
 case "POST":

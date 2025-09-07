@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Entity;
+namespace app\entity;
 
-class Usuario
+class Produto
 {
     private int $_id;
     private string $_nome;
-    private string $_email;
-    private string $_senha;
+    private string $_preco;
+    private string $_quantidade;
 
     public function __construct()
     {
-      
+        
     }
 
     public function getId(): int
@@ -36,25 +36,25 @@ class Usuario
         return $this;
     }
 
-    public function getEmail(): string
+    public function getPreco(): string
     {
-        return $this->_email;
+        return $this->_preco;
     }
 
-    public function setEmail($email): self
+    public function setPreco($preco): self
     {
-        $this->_email = $email;
+        $this->_preco = $preco;
         return $this;
     }
 
-    public function getSenha(): string
+    public function getQuantidade(): string
     {
-        return $this->_senha;
+        return $this->_quantidade;
     }
 
-    public function setSenha($senha): self
+    public function setQuantidade($quantidade): self
     {
-        $this->_senha = password_hash($senha, PASSWORD_DEFAULT);
+        $this->_quantidade = $quantidade;
         return $this;
     }
 
@@ -62,8 +62,8 @@ class Usuario
     {
         return [
             'nome' => $this->getNome(),
-            'email' => $this->getEmail(),
-            'senha' => $this->getSenha()
+            'preco' => $this->getPreco(),
+            'quantidade' => $this->getQuantidade()
         ];
     }
 }

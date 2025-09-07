@@ -4,13 +4,17 @@
     "license": "livre",
     "autoload": {
         "psr-4": {
-            "App\\": "backend/"
+            "app\\": "backend/"
         }
     },
     "authors": [
         {
             "name": "faustinopsy",
             "email": "rodrigohipnose@gmail.com"
+        },
+        {
+            "name": "vitormneris",
+            "email": "joaomoreiraneris0@gmail.com"
         }
     ],
     "require-dev": {

@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Model;
+namespace app\model;
 
 use Exception;
 use PDO;
@@ -41,12 +41,12 @@ $_password: Senha para acessar o banco de dados SQL Server
 */
 class Model
 {
-    private $_host = "localhost";
-    private $_dbName = "meubanco";
-    private $_username = "root";
-    private $_password = "password";
+    private $_host = "";
+    private $_dbName = "my_database.sqlite";
+    private $_username = "";
+    private $_password = "";
     private $_conn;
-    private $_dbType = "mysql"; // Opções: "mysql", "pgsql", "sqlite", "mssql"
+    private $_dbType = "sqlite"; // Opções: "mysql", "pgsql", "sqlite", "mssql"
 
     public function __construct()
     {
@@ -66,9 +66,9 @@ class Model
                 $dsn = "pgsql:host=" . $this->_host . ";dbname=" . $this->_dbName;
                 break;
             case "sqlite":
-                $dsn = "sqlite:" . "sqlite/test_drive.db";
-                $filepath =  "sqlite/test_drive.db";
-                if (!file_exists($filepath)) {
+                $filepath =  __DIR__ . "/../sqlite/". $this->_dbName;
+                $dsn = "sqlite:" . $filepath;
+                if (!file_exists(filename: $filepath)) {
                     die("Arquivo não encontrado: $filepath");
                 }
                 break;
@@ -82,11 +82,19 @@ class Model
                 throw new Exception("Database type not supported.");
             }
             if ($this->_dbType == "sqlite") {
-                $this->_dbType = new PDO($dsn);
+                $this->_conn = new PDO(dsn: $dsn);
+                $this->createTablesIfNotExists();
             } else {
-                $this->_conn = new PDO($dsn, $this->_username, $this->_password);
+                $this->_conn = new PDO(
+                    dsn: $dsn, 
+                    username: $this->_username, 
+                    password: $this->_password
+                );
             }
-            $this->_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->_conn->setAttribute(
+                attribute: PDO::ATTR_ERRMODE, 
+                value: PDO::ERRMODE_EXCEPTION
+            );
         } catch (PDOException $exception) {
             echo "Connection error: " . $exception->getMessage();
         } catch (Exception $exception) {
@@ -111,7 +119,7 @@ class Model
             )
         );
         $query = "INSERT INTO $table ($columns) VALUES ($placeholders)";
-        $stmt = $this->_conn->prepare($query);
+        $stmt = $this->_conn->prepare(query: $query);
         foreach ($data as $key => $value) {
             $stmt->bindValue(param: ":$key", value: $value);
         }
@@ -190,10 +198,39 @@ class Model
         }
         return $stmt->execute();
     }
-    public function deleteWithCustomCondition($table, $condition): bool
+
+    public function createTablesIfNotExists(): void
     {
-        $query = "DELETE FROM $table WHERE $condition";
-        $stmt = $this->_conn->prepare(query: $query);
-        return $stmt->execute();
+        $querys = [ 
+            "CREATE TABLE IF NOT EXISTS usuarios (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nome TEXT NOT NULL,
+                email TEXT UNIQUE NOT NULL,
+                senha TEXT NOT NULL
+            );",
+
+            "CREATE TABLE IF NOT EXISTS enderecos (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                usuario_id INTEGER NOT NULL,
+                cep TEXT NOT NULL,
+                uf TEXT NOT NULL,
+                cidade TEXT NOT NULL,
+                bairro TEXT NOT NULL,
+                rua TEXT NOT NULL,
+                FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+            );",
+
+            "CREATE TABLE IF NOT EXISTS produtos (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nome TEXT NOT NULL,
+                preco DECIMAL(10, 2) NOT NULL,
+                quantidade INTEGER NOT NULL
+            );"
+        ];
+
+        foreach ($querys as $query) {
+            $stmt = $this->_conn->prepare($query);
+            $stmt->execute();
+        }
     }
 }

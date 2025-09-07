@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Test;
+namespace app\tests;
 
-use App\Classes\Model;
+use app\model\Model;
 
 class UserTest
 {
 
-    private $db;
+    private $_db;
 
     public function __construct()
     {
-        $this->db = new Model();
+        $this->_db = new Model();
     }
 
     public function runTests()
@@ -28,10 +28,10 @@ class UserTest
     public function select()
     {
         echo "<b>SELEÇÃO:</b>";
-        $user = $this->db->select('users');
+        $user = $this->_db->select('users');
         echo "Test do Select " . count($user)  . " users.\n";
-        foreach($user as $users){
-            foreach($users as $key => $value){
+        foreach ($user as $users) {
+            foreach ($users as $key => $value) {
                 echo '<br>'.$key.': '.$value;
             }
         }
@@ -40,8 +40,12 @@ class UserTest
     public function insert()
     {
         echo "<b>INSERÇÃO:</b>";
-        $data = ['nome' => 'testUser', 'email' => 'testPass@xxx.com', 'senha' => '123456'];
-        $result = $this->db->insert('users', $data);
+        $data = [
+            'nome' => 'testUser', 
+            'email' => 'testPass@xxx.com', 
+            'senha' => '123456'
+        ];
+        $result = $this->_db->insert('users', $data);
         echo "Teste do Insert: " . ($result ? "Sucesso" : "Falha") . "\n";
         echo "<hr>";
     }
@@ -50,7 +54,7 @@ class UserTest
         echo "<b>ATUALIZAÇÃO:</b>";
         $newData = ['nome' => 'updatedUser'];
         $conditions = ['nome' => 'testUser'];
-        $result = $this->db->update('users', $newData, $conditions);
+        $result = $this->_db->update('users', $newData, $conditions);
         echo "Update : " . ($result ? "Sucesso" : "Falha") . "\n";
         echo "<hr>";
     }
@@ -58,7 +62,7 @@ class UserTest
     {
         echo "<b>EXCLUSÃO:</b>";
         $conditions = ['nome' => 'updatedUser'];
-        $result = $this->db->delete('users', $conditions);
+        $result = $this->_db->delete('users', $conditions);
         echo "Delete : " . ($result ? "Sucesso" : "Falha") . "\n";
         echo "<hr>";
     }

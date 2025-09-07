@@ -14,7 +14,9 @@
       pkgs.mkShell {
         packages = [
           pkgs.php
-          pkgs.vscode
+          pkgs.phpExtensions.sqlite3
+          pkgs.phpPackages.composer
+          pkgs.sqlite
         ];
 
 

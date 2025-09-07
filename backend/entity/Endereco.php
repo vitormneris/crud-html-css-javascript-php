@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace app\entity;
 
 class Endereco
 {
@@ -66,7 +66,7 @@ class Endereco
 
     public function setRua($rua): void
     {
-        $this->__rua = $rua;
+        $this->_rua = $rua;
     }
 
     public function getUsuarioId(): int
@@ -83,11 +83,11 @@ class Endereco
     {
         return [
             'cep' => $this->getCep(),
-            'rua' => $this->getRua(),
-            'bairro' => $this->getBairro(),
-            'cidade' => $this->getCidade(),
             'uf' => $this->getUf(),
-            'idUsuario' => $this->getusuarioId()
+            'cidade' => $this->getCidade(),
+            'bairro' => $this->getBairro(),
+            'rua' => $this->getRua(),
+            'usuario_id' => $this->getusuarioId()
         ];
     }
 }

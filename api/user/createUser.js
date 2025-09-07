@@ -12,8 +12,7 @@ function createUser() {
     const cidadeUsuario = document.getElementById('cidade').value
     const ufUsuario = document.getElementById('uf').value
 
-    if (!nomeUsuario || !emailUsuario || !senhaUsuario ||
-         !cepUsuario || !ruaUsuario || !bairroUsuario || !cidadeUsuario || !ufUsuario) {
+    if (!nomeUsuario || !emailUsuario || !senhaUsuario || !cepUsuario || !ruaUsuario || !bairroUsuario || !cidadeUsuario || !ufUsuario) {
         animarErr('Por favor, preencha todos os campos!')
         return
     }
@@ -29,7 +28,7 @@ function createUser() {
         uf: ufUsuario
     }
 
-    fetch('/backend/usuarios.php', { 
+    fetch('/backend/routes/usuarios.php', { 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
